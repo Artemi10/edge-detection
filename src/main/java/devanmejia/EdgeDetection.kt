@@ -8,6 +8,7 @@ import org.opencv.imgproc.Imgproc.*
 
 fun main() {
     OpenCV.loadShared()
+    println("Write image file name")
     val imagePath = readLine() ?: throw IllegalArgumentException("Invalid path")
     val image = ImageRepository.readImage(imagePath)
     val fetalImage = FetalDetector.getFetalImage(image)
@@ -38,7 +39,7 @@ object FetalDetector {
 
     private fun generateMask(morphologyImage: Mat): Mat {
         val detectedMask = Mat()
-        val detectionKernel = Mat(115, 115, 0)
+        val detectionKernel = Mat(112, 112, 0)
         erode(morphologyImage, detectedMask, detectionKernel)
         return detectedMask
     }
